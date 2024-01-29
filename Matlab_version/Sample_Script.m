@@ -49,17 +49,17 @@ y_pixel_mesh=(Y_coordinate_pixels')*ones(size(X_coordinate_pixels));
 
 % here we compute 
 
-rotation_axis_aziluth_deg=0;
+rotation_axis_azimuth_deg=0;
 
 rotation_angle_deg=0;
 
-rotation_axis_aziluth_rad=(pi/180)*rotation_axis_aziluth_deg;
+rotation_axis_azimuth_rad=(pi/180)*rotation_axis_azimuth_deg;
 rotation_angle_rad=(pi/180)*rotation_angle_deg;
 
 %% TILTED FIELD COMPUTATION
 
 [ particules_azimuth_matrix_rad , particules_elevation_matrix_rad ] = Zenital_tilt( particules_azimuth_matrix_rad, ...
-    particules_elevation_matrix_rad, rotation_axis_aziluth_rad, rotation_angle_rad);
+    particules_elevation_matrix_rad, rotation_axis_azimuth_rad, rotation_angle_rad);
 
 
 %% RAYLEIGHT'S MODEL INPUTS
