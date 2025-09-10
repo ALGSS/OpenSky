@@ -45,11 +45,18 @@ def Zenital_tilt(mat_azimuth_rad=None, mat_elevation_rad=None, rotation_axis_azi
     # rotation_axis_azimuth.
 
     # Rotation matrix in canonical frame :
-    Rot_abup = np.array([[1, 0, 0], [0, np.cos(rotation_angle_rad), - np.sin(rotation_angle_rad)], [0, np.sin(rotation_angle_rad), np.cos(rotation_angle_rad)]])
+    Rot_abup = np.array([[1, 0, 0],
+                         [0, np.cos(rotation_angle_rad), - np.sin(rotation_angle_rad)],
+                         [0, np.sin(rotation_angle_rad), np.cos(rotation_angle_rad)]])
     # transition matrix:
-    Mat_abup_to_xyz = np.array([[np.cos(rotation_axis_aziluth_rad), - np.sin(rotation_axis_aziluth_rad), 0], [np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0], [0, 0, 1]])
+    Mat_abup_to_xyz = np.array([[np.cos(rotation_axis_aziluth_rad), - np.sin(rotation_axis_aziluth_rad), 0],
+                                [np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0],
+                                [0, 0, 1]])
     # transition matrix
-    Mat_xyz_to_abup = np.array([[np.cos(rotation_axis_aziluth_rad), np.sin(rotation_axis_aziluth_rad), 0], [- np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0], [0, 0, 1]])
+    Mat_xyz_to_abup = np.array([[np.cos(rotation_axis_aziluth_rad), np.sin(rotation_axis_aziluth_rad), 0],
+                                [- np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0],
+                                [0, 0, 1]])
+
     # Rotation matrix in xyz frame :
     Rot_xyz = Mat_abup_to_xyz * Rot_abup * Mat_xyz_to_abup
     # Express field in cartesian coordinates:
@@ -62,6 +69,4 @@ def Zenital_tilt(mat_azimuth_rad=None, mat_elevation_rad=None, rotation_axis_azi
     z_prime = Rot_xyz[2, 0] * x + Rot_xyz[2, 1] * y + Rot_xyz[2, 2] * z
     # Express new field in spherical coordinates :
     tilted_mat_azimuth_rad, tilted_mat__elevation_rad = cart2sph(x_prime, y_prime, z_prime)
-    return tilted_mat_azimuth_rad, tilted_mat__elevation_rad
-
     return tilted_mat_azimuth_rad, tilted_mat__elevation_rad

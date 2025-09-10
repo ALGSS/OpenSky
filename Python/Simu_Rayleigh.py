@@ -28,9 +28,10 @@ def Simu_Rayleigh(Sun_Elevation=None, Sun_Azimuth=None, Sky_Particule_Elevation_
     # the local AoP in 3D frame is the Angle between the E vector (OP x OS) and
     # the plane which contains OP and Z.
 
-    Tan_AoP_L = (np.multiply(np.sin(Sky_Particule_Elevation_Matrix) * np.cos(Sun_Elevation), np.cos(Sun_Azimuth - Sky_Particule_Azimuth_Matrix)) - np.sin(Sun_Elevation) * np.cos(
-        Sky_Particule_Elevation_Matrix)) / (np.cos(Sun_Elevation) * np.sin(- Sun_Azimuth + Sky_Particule_Azimuth_Matrix))
-    AoP_Matrix_Global = np.arctan(np.tan(np.arctan(Tan_AoP_L) + Sky_Particule_Azimuth_Matrix))
+    Tan_AoP_L = (np.multiply(np.sin(Sky_Particule_Elevation_Matrix) * np.cos(Sun_Elevation), np.cos(Sun_Azimuth - Sky_Particule_Azimuth_Matrix)) -
+                 np.sin(Sun_Elevation) * np.cos(Sky_Particule_Elevation_Matrix)) / (np.cos(Sun_Elevation) * np.sin(- Sun_Azimuth + Sky_Particule_Azimuth_Matrix))
+    AoP_L = np.arctan(Tan_AoP_L)
+    AoP_Matrix_Global = np.arctan(np.tan(AoP_L + Sky_Particule_Azimuth_Matrix))
     # here we use "AoP_g=atan(tan (AoP_L - alpha_p))" to have AoP_g between -pi/2 and +pi/2
 
     # DoLP Array :
@@ -39,6 +40,5 @@ def Simu_Rayleigh(Sun_Elevation=None, Sun_Azimuth=None, Sky_Particule_Elevation_
     DoLP_Matrix = (1 - np.multiply(cos_diffusion_angle, cos_diffusion_angle)) / (1 + np.multiply(cos_diffusion_angle, cos_diffusion_angle))
     print(DoLP_Matrix.shape)
     DoLP_Matrix = np.maximum(0, np.minimum(DoLP_Max, 1)) * DoLP_Matrix
-    return AoP_Matrix_Global, DoLP_Matrix
 
-    return AoP_Matrix_Global, DoLP_Matrix
+    return AoP_Matrix_Global, DoLP_Matrix, AoP_L
