@@ -34,6 +34,7 @@ def Simu_Rayleigh(Sun_Elevation=None, Sun_Azimuth=None, Sky_Particule_Elevation_
     AoP_Matrix_Global = np.arctan(np.tan(AoP_L + Sky_Particule_Azimuth_Matrix))
     # here we use "AoP_g=atan(tan (AoP_L - alpha_p))" to have AoP_g between -pi/2 and +pi/2
 
+
     # DoLP Array :
 
     cos_diffusion_angle = Xsun * Xparticule + Ysun * Yparticule + Zsun * Zparticule

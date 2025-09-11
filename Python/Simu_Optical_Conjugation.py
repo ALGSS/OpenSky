@@ -48,7 +48,7 @@ def Simu_Optical_Conjugation(Sensor_Pixel_Size=None, Width_in_Pixels=None, Heigh
     X_coordinate_microm = Sensor_Pixel_Size * X_coordinate_pixels
     Y_coordinate_microm = Sensor_Pixel_Size * Y_coordinate_pixels
     Complex_Sensor_Plane = np.ones((Height_in_Pixels, 1)) * X_coordinate_microm + 1j * (np.transpose(Y_coordinate_microm)[:, np.newaxis]) * np.ones((1, Width_in_Pixels))
-    Incident_Rays_Azimuth_Matrix = np.angle(Complex_Sensor_Plane)
+    Incident_Rays_Azimuth_Matrix = np.angle(Complex_Sensor_Plane)  # 默认返回弧度值, 类似于atan(虚部值/实部值) == atan(y/x)
     if Conj_Type == 'r0':
         Incident_Rays_Elevation_Matrix = (np.pi / 2) - np.arctan(np.abs(Complex_Sensor_Plane) / Focal_Length)
 

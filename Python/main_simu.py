@@ -46,13 +46,14 @@ y_pixel_mesh = np.ones(X_coordinate_pixels.size)[np.newaxis, :] * ((Y_coordinate
 # ----------------------------------------------------------------------------------------------
 # here we compute
 rotation_axis_azimuth_deg = 0
-rotation_angle_deg = 0
+rotation_angle_deg = 0   # the rotation angle from true vertical to actual camera vertical, around the axis of azimuth rotation_axis_azimuth.
 rotation_axis_azimuth_rad = (np.pi / 180) * rotation_axis_azimuth_deg
 rotation_angle_rad = (np.pi / 180) * rotation_angle_deg
 
 # TILTED FIELD COMPUTATION
+# change visual field if camera optical axis is tilted from true vertical
 particules_azimuth_matrix_rad, particules_elevation_matrix_rad \
-    = Zenital_tilt(particules_azimuth_matrix_rad, particules_elevation_matrix_rad, rotation_axis_azimuth_rad, rotation_angle_rad)
+    = Zenital_tilt(particules_azimuth_matrix_rad, particules_elevation_matrix_rad, rotation_axis_azimuth_rad, rotation_angle_rad)  # 天顶方向的倾斜
 
 
 
@@ -62,15 +63,13 @@ particules_azimuth_matrix_rad, particules_elevation_matrix_rad \
 # sun azimuth is expressed in x,y camera image plane, seen from above. xyz is direct frame, z is up true vertical axis.
 # seen from outputed camera image, y axis goes up on the image, x axis goes left on the image
 sun_azimuth_deg = 84
-# sun elevation, in degree, from the ground (0) to the vertical z axis (or
-# zenith (90)
-
+# sun elevation, in degree, from the ground (0) to the vertical z axis (or zenith, 90)
 sun_elevation_deg = 0
 
 # maximum DoLP observable in sky, 0.75 for usual clear sky
 DoLP_Max = 0.4
-## RAYLEIGHT'S MODEL SIMULATION
 
+## RAYLEIGHT'S MODEL SIMULATION
 sun_elevation_rad = sun_elevation_deg * np.pi / 180
 sun_azimuth_rad = sun_azimuth_deg * np.pi / 180
 AoP_Matrix_Global_rad_Rayleigh, DoLP_Matrix_Rayleigh, AoP_L \

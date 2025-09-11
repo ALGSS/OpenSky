@@ -15,11 +15,11 @@ def sph2cart(azimuth, elevation, r):
     return x, y, z
 
 
-def Zenital_tilt(mat_azimuth_rad=None, mat_elevation_rad=None, rotation_axis_aziluth_rad=None, rotation_angle_rad=None):
+def Zenital_tilt(mat_azimuth_rad=None, mat_elevation_rad=None, rotation_axis_azimuth_rad=None, rotation_angle_rad=None):
     # INPUTS :
     # mat_azimuth_rad : radian
     # mat_elevation_rad : radian
-    # rotation_axis_aziluth_rad : radian
+    # rotation_axis_azimuth_rad : radian
     # rotation_angle_rad : radian
 
     # OUTPUTS :
@@ -49,12 +49,12 @@ def Zenital_tilt(mat_azimuth_rad=None, mat_elevation_rad=None, rotation_axis_azi
                          [0, np.cos(rotation_angle_rad), - np.sin(rotation_angle_rad)],
                          [0, np.sin(rotation_angle_rad), np.cos(rotation_angle_rad)]])
     # transition matrix:
-    Mat_abup_to_xyz = np.array([[np.cos(rotation_axis_aziluth_rad), - np.sin(rotation_axis_aziluth_rad), 0],
-                                [np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0],
+    Mat_abup_to_xyz = np.array([[np.cos(rotation_axis_azimuth_rad), - np.sin(rotation_axis_azimuth_rad), 0],
+                                [np.sin(rotation_axis_azimuth_rad), np.cos(rotation_axis_azimuth_rad), 0],
                                 [0, 0, 1]])
     # transition matrix
-    Mat_xyz_to_abup = np.array([[np.cos(rotation_axis_aziluth_rad), np.sin(rotation_axis_aziluth_rad), 0],
-                                [- np.sin(rotation_axis_aziluth_rad), np.cos(rotation_axis_aziluth_rad), 0],
+    Mat_xyz_to_abup = np.array([[np.cos(rotation_axis_azimuth_rad), np.sin(rotation_axis_azimuth_rad), 0],
+                                [- np.sin(rotation_axis_azimuth_rad), np.cos(rotation_axis_azimuth_rad), 0],
                                 [0, 0, 1]])
 
     # Rotation matrix in xyz frame :
