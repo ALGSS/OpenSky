@@ -20,7 +20,7 @@ def Simu_Berry(Sun_Elevation=None, Sun_Azimuth=None, Sky_Particule_Elevation_Mat
     # Neutral points' complex projection:
     Z_Babinet = np.tan((np.pi / 2 - Sun_Elevation - Neutral_Point_Angular_distance_Delta / 2) / 2) * np.exp(1j * Sun_Azimuth)
     Z_Brewster = np.tan((np.pi / 2 - Sun_Elevation + Neutral_Point_Angular_distance_Delta / 2) / 2) * np.exp(1j * Sun_Azimuth)
-    Z_Arago = - 1 / np.conj(Z_Brewster)
+    Z_Arago = - 1 / np.conj(Z_Brewster)  # np.conj, 计算共轭复数
     Z_Fourth = - 1 / np.conj(Z_Babinet)
     # Particles' complex projection :
     Z_particules = np.multiply(np.tan((np.pi / 2 - Sky_Particule_Elevation_Matrix) / 2), np.exp(1j * Sky_Particule_Azimuth_Matrix))

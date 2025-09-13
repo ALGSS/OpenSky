@@ -25,4 +25,5 @@ def Simu_Sensor(Intensity_on_pixels=None, pixel_saturation_ratio=None, number_of
     max_pixel_value = (2 ** number_of_bits) - 1
     max_intensity_comming_on_pixels = np.amax(np.amax(Intensity_on_pixels))
     Bits_Matrix = np.minimum((np.floor((max_pixel_value / (max_intensity_comming_on_pixels * pixel_saturation_ratio)) * with_noise_matrix)).astype(int), max_pixel_value)
+
     return Bits_Matrix

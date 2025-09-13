@@ -166,7 +166,7 @@ sun_azimuth_deg
 
 sun_elevation_deg
 
-# CIE table sky model number, refere to the Article
+# CIE table sky model number, refer to the Article
 # "Analysis of vertical sky components under various CIE standard
 # general skies" from D.H.W. Li, C. Li, S.W. Lou, E.K.W. Tsang and J.C. Lam
 # wrote in 2015
@@ -200,14 +200,14 @@ plt.show()
 # we already set size in OPITCS SIMULATION INPUTS :
 sensor_rows
 sensor_cols
-# each polarizer is not realy at its supposed orientation, here we put the
+# each polarizer is not really at its supposed orientation, here we put the
 # mechanical tolerance in polarizer orientation in degrees
 tolerance_deg = 1
-# If T1 is the intensity transmitance for an incident ray totaly linearly
+# If T1 is the intensity transmittance for an incident ray totally linearly
 # polarized along transmission axis and T2 is the intensity transmittance
 # for an incident ray totally linearly polarized at 90 degrees from
-# transmission axis, then the extinction rassio is (T1-T2)/(T1+T2).
-# Because we work with relative intensity their is no need to take into
+# transmission axis, then the extinction ratio is (T1-T2)/(T1+T2).
+# Because we work with relative intensity, there is no need to take into
 # account absorbance, so we suppose null absorbance, which means T1+T2=1.
 
 extinction_ratio = 0.99
@@ -234,7 +234,7 @@ plt.show()
 
 # Here we enter the saturation ratio
 # It is the ratio between the sensor irradiance saturation value and the
-# maximum relative irradiance comming on sensor's pixels.
+# maximum relative irradiance coming on sensor's pixels.
 pixel_saturation = 1.6
 
 # Here we enter the number of output bits for grayscale
@@ -296,45 +296,4 @@ h8 = plt.pcolormesh(X_mesh_print, Y_mesh_print, DoLP_data_processing, cmap='rain
 plt.colorbar()
 plt.axis('image')
 plt.title('Calculated DoLP')
-plt.show()
-
-# This part is not a real part of the simulator.
-# Here we compare our simulation with real outdoor capture
-# To do so we use the same data treatment for outdoor output camera data
-# than for simulated output camera data
-
-Camera_capture = plt.imread('TEST_overcast_sky.tiff')
-Camera_capture_8B = (np.uint8(np.floor((255 / (- 1 + 2 ** 16)) * Camera_capture)))
-plt.figure()
-plt.imshow(Camera_capture_8B, cmap='gray')
-plt.colorbar()
-plt.title('Outdoor capture')
-MaxCapture = np.amax(np.amax(Camera_capture))
-print("outside capture results")
-Camera_capture_double = (Camera_capture).astype('double')
-AoP_expe_imframe, AoP_expe_meridianframe, DoLP_expe = Simu_Data_Processing(Camera_capture_double)
-rows_print_cam, cols_print_cam = DoLP_expe.shape
-X_mesh_print_cam = np.ones((rows_print_cam, 1)) * (np.arange(1, cols_print_cam + 1, 1))[np.newaxis, :]
-Y_mesh_print_cam = ((np.arange(rows_print_cam, 1 + - 1, - 1)))[:, np.newaxis] * np.ones((1, cols_print_cam))
-# map = cmap('C1')
-plt.figure()
-h9 = plt.pcolormesh(X_mesh_print_cam, Y_mesh_print_cam, AoP_expe_imframe, cmap='hsv')
-# colormap(map)
-# set(h,'EdgeColor','none')
-plt.colorbar()
-plt.axis('image')
-plt.title('Outdoor capture AoP, camera frame (rad)')
-plt.figure()
-h10 = plt.pcolormesh(X_mesh_print_cam, Y_mesh_print_cam, AoP_expe_meridianframe, cmap='hsv')
-# colormap(map)
-# set(h,'EdgeColor','none')
-plt.colorbar()
-plt.axis('image')
-plt.title('Outdoor capture AoP, meridian frame (rad)')
-plt.figure()
-h11 = plt.pcolormesh(X_mesh_print_cam, Y_mesh_print_cam, DoLP_expe, cmap='rainbow')
-# set(h,'EdgeColor','none')
-plt.colorbar()
-plt.axis('image')
-plt.title('Outdoor capture DoLP, meridian frame (rad)')
 plt.show()

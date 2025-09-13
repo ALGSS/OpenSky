@@ -32,14 +32,14 @@ def Simu_Micro_Polarizers(Sky_radiance=None, AoP_Matrix_Global_rad=None, DoLP_Ma
     # is:
     #   90  45
     #   135 0
-    # It can aslo be seen as :
+    # It can also be seen as :
     #   |  /
     #   \  -
     # So, express in our x,y,z frame (z vertical axis pointing to zenith,
     # x is left in the image, y is up in the image) :
     #   90  135
     #   45 0
-    # It can aslo be seen as :
+    # It can also be seen as :
     #   |  \
     #   /  -
 
@@ -56,6 +56,5 @@ def Simu_Micro_Polarizers(Sky_radiance=None, AoP_Matrix_Global_rad=None, DoLP_Ma
     # Matrix of sensor size with micro-polarizer directions
     Mat_polarizer_angle = Mat90 + Mat45 + Mat135 + defects_matrix
     Intensity_on_pixels_Matrix = np.multiply(0.5 * Sky_radiance, (1 + np.multiply(extinction_ratio * DoLP_Matrix, np.cos(2 * (AoP_Matrix_Global_rad - Mat_polarizer_angle)))))
-    return Intensity_on_pixels_Matrix
 
     return Intensity_on_pixels_Matrix
