@@ -18,8 +18,8 @@ from Python.Simu_Data_Processing import Simu_Data_Processing
 # than for simulated output camera data
 
 # 图像读取
-img_file_name = '/home/w/dev/proj/basalt/slam_tests/data_proj/images/250829_sample3_red_y/1_Image_20250829174939140_w2448_h2048_pMono12.raw'
-# Camera_capture = plt.imread('TEST_overcast_sky.tiff')
+img_file_name = '../data/250829_sample3_red_y/1_Image_20250829174939140_w2448_h2048_pMono12.raw'
+# Camera_capture = plt.imread('../data/TEST_overcast_sky.tiff')
 
 height = 2048
 width = 2448

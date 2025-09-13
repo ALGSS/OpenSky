@@ -333,7 +333,7 @@ title('Calculated DoLP');
 %To do so we use the same data treatment for outdoor output camera data
 %than for simulated output camera data
 
-Camera_capture=imread('TEST_overcast_sky.tiff');
+Camera_capture=imread('../data/TEST_overcast_sky.tiff');
 
 Camera_capture_8B=uint8(floor((255/(-1+2^16))*Camera_capture));
 
