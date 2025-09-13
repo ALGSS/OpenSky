@@ -18,7 +18,7 @@ from Python.Simu_Data_Processing import Simu_Data_Processing
 # than for simulated output camera data
 
 # 图像读取
-img_file_name = '/home/w/dev/proj/basalt/slam_tests/data_proj/images/250829_sample3_red_y/61_Image_20250829175045892_w2448_h2048_pMono12.raw'
+img_file_name = '/home/w/dev/proj/basalt/slam_tests/data_proj/images/250829_sample3_red_y/1_Image_20250829174939140_w2448_h2048_pMono12.raw'
 # Camera_capture = plt.imread('TEST_overcast_sky.tiff')
 
 height = 2048
@@ -43,8 +43,21 @@ print("outside capture results")
 Camera_capture_double = (Camera_capture).astype('double')
 AoP_expe_imframe, AoP_expe_meridianframe, DoLP_expe = Simu_Data_Processing(Camera_capture_double)
 rows_print_cam, cols_print_cam = DoLP_expe.shape
-X_mesh_print_cam = np.ones((rows_print_cam, 1)) * (np.arange(1, cols_print_cam + 1, 1))[np.newaxis, :]
-Y_mesh_print_cam = (np.arange(rows_print_cam, 1 + - 1, - 1))[:, np.newaxis] * np.ones((1, cols_print_cam))
+X_mesh_print_cam = np.ones((rows_print_cam, 1)) * (np.arange(1, cols_print_cam + 1, 1))[np.newaxis, :]  # arange, [1, cols_print_cam + 1)， 1,2,3,...,1224
+Y_mesh_print_cam = (np.arange(rows_print_cam, 1 + - 1, - 1))[:, np.newaxis] * np.ones((1, cols_print_cam)) # arange, [rows_print_cam, 0) ， 1024，1023，1022，...，1
+
+# X_mesh_print_cam
+# [[1,2,3,...,1224],
+#  [1,2,3,...,1224],
+#  ...
+#  [1,2,3,...,1224]]
+
+# Y_mesh_print_cam
+# [[1024,1024,1024,...,1024],
+#  [1023,1023,1023,...,1023],
+#  ...
+#  [1,   1,   1,   ...,1   ]]
+# plt.pcolormesh中，认为从左下角为基础计算的，对应了Z(rows-1, 0)的值，不是以z的索引显示在坐标值上。
 
 # map = cmap('C1')
 plt.figure()

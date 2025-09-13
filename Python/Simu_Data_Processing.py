@@ -54,6 +54,14 @@ def Simu_Data_Processing(Intensity_Matrix=None):
             x_super_pixel = + j - (cols_final_image / 2) - 0.5
             y_super_pixel = - k + (rows_final_image / 2) + 0.5
             # numpy.angle 用于计算复数的相位角（角度或弧度）。它返回复数在复平面上与正实轴之间的逆时针夹角，范围为 (-π, π]。
-            AoP_data_processing_meridianframe[k, j] = 0.5 * np.angle((S1 + S2 * 1j) / (x_super_pixel + y_super_pixel * 1j) / (x_super_pixel + y_super_pixel * 1j))
+            # 计算的是实际测量信号与参考信号之间的相位差异，表示两个复数信号的相对相位差。分子，测量的偏振信号；分母，参考信号或期望信号的平方。
+            AoP_data_processing_meridianframe[k, j] = 0.5 * np.angle((S1 + S2 * 1j) / ((x_super_pixel + y_super_pixel * 1j)**2))
+            # 下面这一堆和上面是等效的
+            # AoP_data_processing_meridianframe[k, j] = AoP_data_processing_imframe[k, j] - np.arctan2(y_super_pixel, x_super_pixel)
+            # if AoP_data_processing_meridianframe[k, j]<-np.pi/2:
+            #     AoP_data_processing_meridianframe[k, j]+= np.pi
+            # if AoP_data_processing_meridianframe[k, j]>np.pi/2:
+            #     AoP_data_processing_meridianframe[k, j]-= np.pi
+
 
     return AoP_data_processing_imframe, AoP_data_processing_meridianframe, DoLP_data_processing
